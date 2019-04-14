@@ -1,0 +1,32 @@
+1. Examplify
+   E.g.: given a digital time, calculate the angle between the hour and the minute hands
+
+
+   3:30 -> pi/2
+
+   4:15 -> 
+
+   5:45 -> pi/2 + pi/6 = 2pi/3
+
+   12:00 -> 0
+
+   6:00 -> pi
+
+   Look at examples and try to develop a rule
+
+2. Pattern Matching
+
+
+
+
+3.
+
+
+
+
+4.
+
+
+
+
+5.

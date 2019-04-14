@@ -1,0 +1,6 @@
+Data Structures:
+ArrayList
+   - Access: O(1)
+
+
+Search/Sort Algorithms:
