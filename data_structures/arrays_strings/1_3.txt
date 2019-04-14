@@ -1,0 +1,39 @@
+// Given two strings, decide is one is a permutation of the other
+
+// Questions
+// 1. Case sensitive check?
+// 2. Whitespace significant?
+
+
+
+Approach 1:
+1. Make sure the lengths are the same
+2. Sort the strings
+3. Check if they equal each other
+
+Approach 2:
+Count the # of character appearances and make sure they're the same
+
+public boolean permutation(String str1, String str2) {
+	if (str1 == null || str2 == null) return false;
+
+	// permutations are only possible if the strings are the same length
+	if (str1.length() != str2.length()) return false;
+
+	int[] letters = new int[256]; // BASED ON ASSUMPTION OF ASCII i.e. UTF-8
+
+	char[] str_array = str1.toCharArray();
+	for (char c : s_array) {
+		letters[c]++; // incrememnt the count of this character
+	}
+
+	// iterate over the second string and check if each character matches
+	for (int i = 0; i < str2.length(); i++) {
+		// if subtracting one from the character count of this current character
+		// results in a value < 0, this character didn't have a match in str1
+		if (--letters[str2.charAt(i)] < 0)
+			return false;
+	}
+
+	return true;
+}

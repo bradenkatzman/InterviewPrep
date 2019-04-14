@@ -2,3 +2,45 @@
 // Implement an algorithm to determine if a string has all unique characters. What 
 // if you cannot use additional data structures?
 
+// 1. Is the string ASCII or Unicode
+//    - ASCII uses 8-bit encoding --> 256 possible characters
+//    - Unicode uses variable bit encoding
+//        - UTF-8 = ASCII
+
+
+// str is an ASCII (i.e. 8-bit encoding)
+public boolean isUniqueChars(String str) {
+	if (str == null || str.isEmpty()) return false;
+
+	if (str.length() > 256) return false;
+
+	boolean charIDSet = new boolean[256];
+	for (int i = 0; i < str.length(); i++) {
+		// check if the index corresponding to this character in the string has already //been seen
+		int char_val = str.charAt(i);
+		if (charIDSet[char_val]) {
+			return false;
+		}
+
+		// mark the character as seen
+		charIDSet[char_val] = true;
+	}
+
+	// the string has been fully iterated without encountering the same character twice
+	return true;
+}
+
+
+
+---------------------
+Test:
+null -> false
+
+"" -> false
+
+"aba" ->
+char_val = 
+
+
+
+"abcd"

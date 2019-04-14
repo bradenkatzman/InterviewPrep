@@ -1,0 +1,6 @@
+1. ASCII or Unicode?
+2. Case sensitive?
+3. Is whitespace significant?
+4. Library functions allowed?
+   - str.toCharArray()
+   - java.util.Arrays.sort(charArray)
