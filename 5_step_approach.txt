@@ -1,1 +1,29 @@
-5_step_approach.txt
+1. Resolve ambiguities
+   - What are the data types? ints, doubles, characters?
+   - What sort of list is it? ArrayList, array?
+   - Is the list sorted?
+   - Can I assume that all of the data is non-null?
+   - Are there any memory requirements for this problem?
+   - What is the desired return type?
+
+ 2. Design an algorithm
+    - What are its space and time complexity?
+    - What happens if there is a lot of data?
+    - Have I leveraged the information about the data? e.g. ages are reasonably under a max amount, always greater than 0
+
+    ** Start by mentioning the naive solution and its complexity, and then improve it
+
+ 3. Write pseudocode first
+    - TELL INTERVIEWER THAT I WILL EVENTUALLY WRITE "REAL" CODE
+    - Step through the pseudocode as if it were real code
+
+ 4. Write code at a moderate pace
+    - Use data structures generously: where relevant, use a good data structure or define your own
+
+ 5. Test code and carefully fix mistakes
+    - Extreme cases: 0, negative, null, maximums, minimums
+    - User error: what happens if the user passes in a null or negative value?
+    - General cases: test the normal cases
+
+    When a mistake is encountered, ask:
+       - Why is the bug occuring? Don't just attempt a random fix
