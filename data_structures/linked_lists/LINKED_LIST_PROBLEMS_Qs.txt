@@ -1,0 +1,7 @@
+LINKED_LIST_PROBLEMS_Qs.txt
+
+1. Singly or doubly?
+2. Data type?
+3. Parameters?
+4. Return type?
+	- Null first node?

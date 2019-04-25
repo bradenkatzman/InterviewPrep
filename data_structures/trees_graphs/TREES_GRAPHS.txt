@@ -1,0 +1,4 @@
+Binary Tree vs. Binary Search Tree
+	Binary Search Tree: imposes the condition that for all nodes, the left 
+	children are less than or equal to the current node, which is less than
+	all of the right nodes

@@ -1,0 +1,99 @@
+Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a binary search tree with minimal height
+
+1 > 2 > 3 > 4 > 5 > 6 > 7 > 8 > 9
+
+BST:
+Left child always less than self → applies for all subtrees. Entire left subtree is less than root
+Right child always greater than self  → Entire right subtree is greater than root
+
+Minimal height: ~balanced
+
+Ideas:
+Middle item in the list should be the root of the tree
+
+5
+           /   \
+          3     7
+         /  \    / \  
+        2	 4  6 8 
+       /             \
+     1               9
+
+Pseudocode:
+Input: sorted array
+Output: Node root (of BST)
+
+Get the middle node → set as root
+
+Given some a, b limits
+Get middle value → create node
+
+Int mid = (0 + array.length) / 2;
+Root = array[mid];
+root.left = array[(0 + mid)/2];
+Root.right = array[(mid + array.length)/2];
+
+Public class Node {
+	Int value;
+	Node left;
+	Node right;
+
+	Public Node(int value) {
+	
+}
+
+	// accessors and mutators
+}
+
+Public static Node buildBST(int[] sortedList) {
+	If (sortedList == null) return null;
+
+	// index bounds
+	Int lower = 0;
+	Int upper = sortedList.length-1;
+
+	Int result = binarySearch(sortedList, lower, upper);
+	If (result != -1) {
+		Node root = new Node(result);
+		Root.left = 
+}
+
+}
+
+Public static int binarySearch(int[] sortedList, int a, int b) {
+If (sortedList == null) return null;
+
+// stopping condition -- a == b implies search completed on this subset
+If (a == b) return -1; // this will imply that the value at a is a leaf in the tree
+
+Int mid = (a + b)/2;
+// stopping condition -- mid == a || mid == b
+If (mid == a || mid == b) return -1
+
+// return the middle element given upper and lower bounds	
+Return sortedList[(a + b)/2];
+}
+
+
+SOLUTION:
+Public static Node createMinimalBST(int[] array) {
+	Return createMinimalBST(array, 0, array.length-1);
+}
+
+Public static Node createMinimalBST(int[] array, int a, int b) {
+	
+	// stopping condition is when the indices have passed each other
+	If (end < start) {
+		Return null;
+	}
+
+	Int mid = (a + b) / 2;
+	Node n = new Node(array[mid]);
+
+	// recursively call createMinimalBST on the left and right subsets of the array and set the results as the left and right child of n → excluding the current location in the list
+	N.left = createMinimalBST(array, start, mid - 1);
+	N.right = createMinimalBST(array, mid + 1, end);
+
+	Return n;
+
+}

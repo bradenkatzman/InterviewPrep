@@ -1,0 +1,64 @@
+// first scan from front counts how many spaces there are in the string
+// new string = true_length + spaces*2
+
+// second scan from back edits the string
+
+public String replaceSpaces(String str, int true_length) {
+	// check if the string is null, or true length is <= 0
+	if (str == null || true_length <= 0) return "";
+
+	// check if true_length is greater than actual computed length
+	if (true_length >= str.length()) return str;
+
+	// convert string to char array
+	char[] c_array = str.toCharArray();
+
+	// counter for number of spaces
+	int spaces_count = 0;
+	
+	// iterate over array and count number of spaces
+	for (int i = 0; i < true_length; i++) {
+		if (c_array[i] == ' ')
+			spaces_count += 1;
+	}
+
+	if (spaces_count == 0)
+		return str;
+
+	// create new array with size true_length + (spacesCount * 2)
+	char[] c_replacedSpaces = new char[true_length + (spacesCount * 2)];
+	// iterate over original array (from rear, starting at true_length)
+	for (int i = true_length-1; i >= 0; i++) {
+		// if character is not a space
+		if (c_array[i] != ' ') {
+			// shift it 2 spaces to the right
+			c_replacedSpaces[i + (2 * spaces_count)] = c_array[i];
+		} else {
+			// character is a space
+		    // there should now be two spaces to the right of the space (from shifting)
+		    // place a '%' in the current location and a '2' and '0' in the two spaces to // the right
+
+		    c_replacedSpaces[i] = '%';
+		    c_replacedSpaces[i+1] = '2';
+		    c_replacedSpaces[i+2] = '0';
+
+		    spaces_count -= 1;
+		}
+		
+	}
+
+	return new String(c_replacedSpaces);
+}
+
+TEST:
+"", 0
+
+"ab", 5
+
+null, null
+
+"abcd", 4
+
+"ab ab  ", 5   c_array = [a,b, ,a,b, , ], spacesCount = 0
+				c_replacedSpaces [a,b,%,2,0,a,b], i = 0
+				"ab%20ab"

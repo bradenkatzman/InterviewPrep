@@ -1,0 +1,60 @@
+// Implement a function to check if a binary tree is a binary search tree
+
+BT:
+Each node has at max 2 children
+
+BST:
+Each node has at max 2 children
+Left child is always less than parent value, right child is always greater than parent value
+Recursive definition: left subtree is less than root, right subtree is greater than root
+
+Function:
+Input: root of a tree → guaranteed to be a binary tree? Operations: node.left, node.right
+Node.adjacencies → Node[]
+Output: boolean
+
+Large tree? Stopping condition: NO
+Always return boolean
+
+Edge cases:
+Null root
+
+Public static boolean isTreeBST(Node root) [
+	Return isTreeBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+}
+
+Public static boolean isTreeBST(Node root, int min, int max) {
+	If (root == null) return true;
+
+	// make sure the value at this node matches the condition 
+	If (root.value <= min || root.value > max) return false;
+
+	// check that the BST conditions are met at this node
+	// LEFT
+	If (root.left != null) {
+		Return isTreeBST(root.left	
+	}
+
+	// recursively check the right and left subtree by using appropriate min and max values
+	If (!isTreeBST(root.left, min, root.value) || !isTreeBST(root.right, root.value, max) 
+		Return false; // one of the two subtrees is not a BST=
+
+	// if reached here, the two subtrees are balanced
+	Return true;
+}
+
+
+   5
+  / \
+ 3  6
+ /   / \
+2  7 9
+
+Time: 
+Space: 
+
+
+PROBLEMS → a tree that has a value in a subtree that is greater than root
+NEED TO PASS MIN AND MAX BOUNDS THROUGH RECURSION
+
+
