@@ -1,0 +1,102 @@
+
+
+Given a directed graph, design an algorithm to find out whether there is a route between two nodes
+
+Can a node have multiple multiple edges? Is there more than one path in and out of each node to explore
+
+Method:
+Input: Node root, Node n1, Node n2
+Output: boolean
+
+Inputs always non-null? No
+
+Can there by cycles? Yes → mark nodes as visited
+
+In the case large tree, is there a quit condition after certain time reached?
+MAX depth?
+MAX nodes visited?
+→ NO
+
+Are there repeated values? YES → searching for objects
+
+Are edges two way? YES
+Reduces problem to locating two nodes in a graph → if I’m able to get to it via graph traversal, a route necessarily exists
+
+
+Public class Node {
+	Public Node[] adjacencies;
+	Public Object data;
+	Public boolean visited = false;
+}
+
+Public boolean areNodesConnected(Node root, Node n1, Node n2) {
+	If (root == null || n1 == null || n2 == null) return null;
+	
+	Boolean foundN1 = false;
+	Boolean foundN2 = false;
+	
+
+	If (root == n1) {
+foundN1 = true;		
+	}
+
+	If (root == n2) {
+		foundN2 = true;
+	}
+
+	// check if root, n1, and n2 are all the same
+	If (foundN1 && foundN2) return true;
+
+	// mark the root as visited
+	Root.visited = true;
+	
+	// make a queue to hold nodes to be visited
+	Queue queue = new Queue();
+	queue.enqueue(root);
+	
+While (!queue.isEmpty()) { // while there are still nodes to process
+	// dequeue the item at the front of the queue
+	Node n = queue.dequeue();
+	For (Node r : n.adjacencies) {
+		// only process r if it hasn’t been visited yet (avoids cycles)
+		If (r.visited == false) {
+			// check if the node r is n1 or n2
+			If (r == n1) foundN1 = true;
+			If (r == n2) foundN2 = true;
+
+			// check stopping condition
+			If (foundN1 && foundN2) return true;
+
+			// mark r as visited
+			R.visited = true;
+
+			// add r to the queue
+			queue.enqueue(r);
+}
+	}
+} // end while
+
+// if we break out of the while loop, all nodes have been visited and the stopping
+// condition was not met. The two nodes weren’t in the directed graph
+Return false;
+}
+Worst time: O(n), Worst space: O(n)
+Average time: O(n), Average: O(n) → finding halway through is O(n/2) = O(n)
+
+TEST:
+A → B →D 	 areNodesConnected(A, D, C)
+	\	
+	 C
+
+A → B →D 	 areNodesConnected(A, D, G)
+
+A	areNodesConnected(A, A, A)	
+	
+areNodesConnected(null, B, A)
+
+
+
+TRADEOFFS to discuss:
+Depth first search is a bit simpler to implement since it can be done with simple recursion
+Breadth first search would be useful to find the shortest path
+Depth first search may traverse one adjacent node very deeply before every going onto the immediate neighbors

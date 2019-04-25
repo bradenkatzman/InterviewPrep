@@ -1,0 +1,20 @@
+Recursive algorithms take a least O(n) space, where n is the depth of the recursive call
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sources:
+https://softwareengineering.stackexchange.com/questions/25052/in-plain-english-what-is-recursion
+
+https://www.topcoder.com/community/competitive-programming/tutorials/an-introduction-to-recursion-part-2/
+
+http://web.mit.edu/6.005/www/fa15/classes/10-recursion/

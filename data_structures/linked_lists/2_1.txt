@@ -1,0 +1,29 @@
+// Write code to remove duplicates from an unsorted linked list
+
+public Node removeDuplicates(Node start) {
+	if (start == null || start.getNext() == null) {
+		return start;
+	}
+
+	HashMap<Node, Integer> nodeCount = new HashMap<>();
+
+	Node prev = start;
+	Node curr = start;
+
+	while (curr != null) {
+		if (nodeCount.containsKey(curr.getData())) {
+			// set previous to point and curr's next node. keep prev where it is
+			prev.setNext(curr.getNext());
+		} else {
+			nodeCount.put(curr.getData(), 1);
+
+			// move prev forward forward
+			prev = curr;
+		}
+
+		// in both instances, we move curr forward
+		curr = curr.getNext();
+	}
+
+	return start;
+}

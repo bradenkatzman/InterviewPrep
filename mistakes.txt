@@ -1,1 +1,10 @@
-mistakes.txt
+Linked List:
+- Can only iterate in one direction in the case of singly
+
+- Use two pointers and move runner 2 spaces for every 1 space that iterator moves. 
+	Runner will go twice as fast and eventually hit iterator if cycle
+
+
+Syntax:
+list.toCharArray();
+list.sort()

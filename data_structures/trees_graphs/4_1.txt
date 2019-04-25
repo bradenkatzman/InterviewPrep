@@ -1,0 +1,33 @@
+// Implement a function to check if a binary tree is balanced
+
+public boolean isBalanced(Node root) {
+	if (checkHeight(root) == -1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+public static int checkHeight(Node root) {
+	if (root == null) return 0;
+
+	// get the height of the left and right subtrees
+	int leftHeight = checkHeight(root.left);
+	if (leftHeight == -1) {
+		// indicates that the left subtree is not balanced
+		return -1;
+	}
+
+	int rightHeight = checkHeight(root.right);
+	if (rightHeight == -1) {
+		return -1;
+	}
+
+	// check if the current node has a balanced tree below it
+	if (Math.abs(leftHeight - rightHeight) > 1) {
+		return -1; // the tree is imbalanced
+	} else {
+		// the tree is balanced so return the actual height
+		return Math.max(leftHeight, rightHeight) + 1; // we add 1 for this node
+	}
+}

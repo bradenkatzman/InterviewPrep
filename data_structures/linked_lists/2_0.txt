@@ -1,0 +1,69 @@
+// Implement a Singly LinkedList
+
+[data]->[data]->[data]->null
+
+public class Node {
+	private Object data;
+	private Node next;	
+
+	public Node(Object data) {
+		this.data = data;
+		this.next = null;
+	}
+
+	public Node(Object data, Node next) {
+		this.data = data;
+		this.next = next;
+	}
+
+	//accessors
+	public Object getData() {
+		return this.data;
+	}
+
+	public Node getNext() {
+		return this.next;
+	}
+
+
+	// mutators
+	public void setData(Object data) {
+		this.data = data;
+	}
+
+	public void setNext(Node next) {
+		this.next = next;
+	}
+
+	public void appendToTail(Object data) {
+		// make the new node
+		Node new = Node(data);
+
+		Node n = this;
+
+		// move through the list until we find a next node that is null
+		while (n.getNext() != null) {
+			n = n.getNext();
+		}
+
+		// at this point, Node n has a null for its next node, so we're at the tail
+		n.setNext(new);
+	}
+}
+
+public Node deleteFirstNodeWithData(Node start, Object data) {
+	Node prev = start;
+	Node curr = start;
+
+	while (curr != null) {
+		if (curr.getData() == data) {
+			prev.setNext(curr.getNext());
+			return start;
+		}
+
+		prev = curr;
+		curr = curr.getNext();
+	}
+
+	return start;
+}
