@@ -1,0 +1,73 @@
+// Write a method to return all subsets of a set
+
+
+
+Input: [1]
+Output: [], [1]
+
+Input: [1, 2]
+Output: [], [1], [2], [1, 2]
+
+Input: [1, 2, 3]
+Output: [], [1], [2], [3], [1, 2], [2, 3], [1, 3], [1, 2, 3]
+
+// use recursion because the problem can be solved by breaking the set into smaller sets
+
+
+
+
+
+// base cases
+if (list size == 0) return empty set
+if (list size == 1) return empty set, list
+
+// recursive step is to generate all of the subsets of the list without the last item, and then add the last item to all of those sets
+subsets.add(list)
+subsets.add(list last item)
+
+new_subsets(list without last item)
+for each new_subset:
+	// make a copy and add last item to it
+
+
+
+public static List<List<Integer>> generateAllSubsetsOfSet(List<Integer> set) {
+	if (set == null) return null; // error handling
+
+	ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<>>();
+	if (set.size() == 0) {
+		// add and return the empty set
+		subsets.add(new ArrayList<Integer>());
+		return subsets;
+	}
+
+	if (set.size() == 1) {
+		// add the empty set and the set itself and return
+		subsets.add(new ArrayList<Integer>());
+		subsets.add(set);
+		return subsets;
+	}
+
+	subsets.add(set); // the whole set itself is always a subset
+
+	// add the last item as its own set (without making a recursive call so we avoid storing multiple empty sets)
+	ArrayList<Integer> lastItemSet = new ArrayList<>();
+	lastItemSet.add(set.get(set.size() - 1));
+
+	// recursive step: generate all subsets of the set without the last item i.e. break the problem into smaller parts
+	List<List<Integer>> newSubsets = generateAllSubsetsOfSet(set.subList(0, set.size() - 2));
+	for (List<Integer> newSubset : newSubsets) {
+		// add the new subset itself
+		subsets.add(newSubset);
+
+		// add the new subset with the last item added to it
+		newSubset.add(set.get(set.size() - 1));
+		subsets.add(newSubset);
+	}
+
+	return subsets;
+}
+
+
+Time: O(2^n)
+Space: O(2^n)

@@ -1,0 +1,50 @@
+// You are given a binary tree in which each node contains a value. Design an algorithm to print all paths which sum to a given value. The path does not need to start or end at the root or a leaf
+
+		//				5
+		//	   	     /     \
+		//.         3	     7
+		//		  /   \    /  \
+		//		 2     4  6    8
+
+
+5
+
+if (root.getValue() == sum) print(root)
+
+if (root == null) return;
+
+
+Use DFS to search, pass in a running sum
+	- check the running sum + current node value
+	- start a new running sum from this node and recurse on children
+
+
+public static void printAllPathsEqualingSum(Node root, int givenSum) {
+	if (root == null) return;
+
+	if (root.getValue() == givenSum)
+}
+
+private static void printAllPathsEqualingSum(Node root, int givenSum, int runningSum) {
+	if (root == null) return;
+
+	if (root.getValue() == givenSum) {
+		System.out.println("Node value: " + root.getValue());
+	}
+
+	// check the running sum + this node's value
+	if ((root.getValue() + runningSum) == givenSum)) {
+		System.out.println("Node value + running sum = " + root.getValue() + " + " + runningSum);
+		// recurse on this node's children and reset the running sum
+		printAllPathsEqualingSum(root.getLeft(), givenSum, root.getValue());
+		printAllPathsEqualingSum(root.getRight(), givenSum, root.getValue());
+	} else if ((root.getValue() + runningSum) < givenSum) {
+		// add this node's value to the running sum and recurse on both children
+		printAllPathsEqualingSum(root.getLeft(), givenSum, runningSum + root.getValue());
+		printAllPathsEqualingSum(root.getRight(), givenSum, runningSum + root.getValue());
+	} else if (root.getValue() < givenSum) {
+		// the running sum + this node's value exceed the running sum, so we start over with this root's value
+		printAllPathsEqualingSum(root.getLeft(), givenSum, root.getValue());
+		printAllPathsEqualingSum(root.getRight(), givenSum, root.getValue());
+	}
+}

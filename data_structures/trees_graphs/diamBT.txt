@@ -1,0 +1,37 @@
+// Find the diameter of a binary tree. The diameter is equal to the number of nodes on the longest
+// path between any two leaves
+
+
+		//				5
+		//	   	     /     \
+		//.         3	     7
+		//		  /   \    /  \
+		//		 2     4  6    8
+
+
+// find the deepest node in the left subtree = maxDepthLeft
+// find the deepest node in the right subtree = maxDepthRight
+
+
+base case: node == null --> 0
+
+computeBTDiameter(5)
+  maxDepth(3) = 2						+ 			maxDepth(7) = 2 --> 4
+		1 + max(maxDepth(2), maxDepth(4)) -> 2				1 + max(maxDepth(6), maxDepth(8)) -> 2
+					1			1										1			1
+
+
+	public static int computeBTDiameter(Node root) {
+		if (root == null) return 0;
+
+		return maxDepth(root.getLeft()) + maxDepth(root.getRight()) + 1;
+	}
+
+	public static int maxDepth(Node root) {
+		if (root == null) return 0;
+
+		int leftDepth = maxDepth(root.getLeft());
+		int rightDepth = maxDepth(root.getRight());
+
+		return 1 + Math.max(leftDepth, rightDepth);
+	}

@@ -1,0 +1,36 @@
+// Write a method to compute all permutations of a string
+
+a:
+a
+
+ab:
+ab, ba
+
+
+abc:
+a + permutations(bc) --> abc, acb
+b + permutations(ac) --> bac, bca
+c + permutations(ab) --> cab, cba
+
+// base case: length of string == 1 --> return string
+
+// recursive step: return currentLetter + permutations(substringBeforeCurrentLetter + substringAfterCurrentLetter)
+
+// permutations of everything before + everything after
+
+public static ArrayList<String> generateAllPermutations(String str) {
+	ArrayList<String> perms = new ArrayList<>();
+	if (str.isEmpty() || str.length() == 1) {
+		perms.add(str);
+		return perms;
+	}
+
+	for (int i = 0; i < str.length; i++) {
+			perm.insert(str.charAt(i), 0);
+		}
+	}
+
+	return permutations;
+}
+
+private static final String CS = ",";

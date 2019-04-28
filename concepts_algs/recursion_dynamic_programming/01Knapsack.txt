@@ -1,0 +1,54 @@
+Given a list of items with values and weights, as well as a max weight, find the maximum value you can generate from items where the sum of the weights is less than or equal to the max
+
+items - weight,value
+
+1,6 - a
+2,10 - b
+3,12 - c
+
+maxWeight = 5
+
+knapsack(items, maxWeight) = 22
+
+
+// generate all combinations of items that have less than or equal to maxWeight
+// pick the one with the greatest value
+
+// generate an items combination:
+
+
+public class Knapsack {
+	public int item;
+	public int value;
+}
+
+
+Input: List<Knapsack> knapsacks, int maxWeight
+Output: int maxValue
+
+
+// generate all combos pseudocode
+
+base case: if length of list == 1: value of single item
+
+recursive step: return firstItem + (allCombos of rest of list)
+
+
+public static List<List<Knapsack>> generateAllKnapsackCombos(List<Knapsack> knapsacks) {
+	List<List<Knapsack>> knapsackCombos = new ArrayList<ArrayList<Knapsack>>();
+	
+	// add all elements in knapsacks as a combination - this step is made in the base case and recursive step case
+	knapsackCombos.add(knapsacks);
+
+
+	// base case is when the size of knapsacks list is 1, then there is only one possible combination
+	if (knapsacks.size() == 1) {
+		return knapsackCombos;
+	}
+
+
+	// recursive step returns the first item + all combinations of remaining items
+	return knapsackCombos.addAll(generateAllKnapsackCombos(knapsacks.subList(1, knapsacks.size()-1)));
+}
+
+list = <a, b

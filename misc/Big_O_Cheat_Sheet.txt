@@ -1,0 +1,28 @@
+O(1) constant: operation doesn't depend upon the size of the input, e.g. list access, adding node to the head of a linked list when head ptr is maintained
+
+O(n) linear: the run time complexity is proportionate to the size of n
+	also linear: 2n, 3n, ...
+
+O(log n) logarithmic: the number that you have to raise 10 to get n. Log time is normally associated with algorithms that break the problem into smaller chunks per each invocation e.g. search a binary search tree
+
+
+O(n log n): usually associated with an algorithm that breaks the problem into smaller chunks per each invocation, and then takes the results of these smaller chunks and stitches them back together, e.g. mergesort
+
+O(n^2) quadratic: e.g. double for loops through all elements, bubble sort
+
+O(n^3): cubic
+
+O(2^n) exponential
+
+
+Data Structures:
+ArrayList
+   - Access: O(1)
+
+
+Search/Sort Algorithms:
+
+
+
+
+

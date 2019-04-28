@@ -1,0 +1,52 @@
+// iterative BFS
+
+pseudocode:
+// instantiate a queue to hold nodes to be processed
+// make the root node as visited
+
+// while the queue isn't empty
+	// dequeue the first item in the queue
+
+	// go through all of its adjacencies
+
+		// process node
+			// if it has already been visited: we found a cycle
+
+			// else: mark node as visited
+
+		// add it to the queue so it can be processed later
+
+
+public static void detectCycleBFS(Node root) {
+	if (root == null) return;
+
+	Queue<Node> queue = new LinkedList();
+
+	root.setVisited(true);
+
+	// add root to the queue so its adjacencies will be processed
+	queue.addLast(root);
+
+	while (!queue.isEmpty()) {
+		Node n = queue.getFirst();
+
+		// in a graph we'd look through all adjacencies, here we know its a BT so just look at each child
+		if (n.getLeft().getVisited()) {
+			System.out.println("Cycle detected processing node with value: " + n.getValue());
+			return;
+		}
+		// mark as visited and add to queue
+		n.getLeft().setVisited(true);
+		queue.addLast(n.getLeft());
+
+		if (n.getRight().getVisited()) {
+			System.out.println("Cycle detected processing node with value: " + n.getValue());
+			return;
+		}
+		// mark as visited and add to queue
+		n.getRight.setVisited(true);
+		queue.addLast(n.getRight());
+
+
+	}
+}

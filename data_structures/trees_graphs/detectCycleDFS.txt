@@ -1,0 +1,81 @@
+// Detect cycle in an undirected graph
+
+// perform a DFS through the graph
+ // base case is node is null
+
+ // recursive step is to DFS on left substree
+
+// process step:
+ // check if this node is already in the array list:
+ 	// add the node
+ 	// pass the list to a print cycle routine
+ // else:
+ 	// add the current node (object, not value) as visited to the list
+ 
+
+
+ // recurse on the left subtree
+
+
+
+public static void detectCycle(Node root) {
+	if (root == null) return;
+
+	// store the visited nodes so we can easily show the cycle
+	List<Node> visitedNodes = new ArrayList<>();
+
+	// perform DFS on graph and stop and print cycle if a node is visited twice
+	detectCycleDFS(root, visitedNodes);
+}
+
+private static void detectCycleDFS(Node root, List<Node> visitedNodes) {
+	// base case is to return when the root is null
+	if (root == null) return;
+
+	// recursive step - DFS on left substree
+	detectCycleDFS(root.getLeft(), visitedNodes);
+
+	// process node by checking if it's already visited
+	if (visitedNodes.contains(root)) {
+		// cycle detected -- add the node to the list and pass to the print cycle routine
+		visitedNodes.add(root);
+		return printCycle(visitedNodes);
+	} else {
+		// add the node
+		visitedNodes.add(root);
+	}
+
+	// recurse on the right subtree
+	detectCycleDFS(root.getRight(), visitedNodes);
+
+}
+
+private static void printCycle(List<Node> visitedNodes) {
+	// printCycle works by print the nodes in reverse order until the second
+	// occurence of the node at the back of the list
+	int lastNodeIdx = visitedNodes.size()-1;
+	if (lastNodeIdx < 1) return;
+
+	System.out.print("Cycle detected: " + visitedNodes.get(lastNodeIdx).getValue() + " - ");
+	for (int i = lastNodeIdx-1; i >= 0; i--) {
+		// print the node's value
+		System.out.print(vistedNodes.get(i).getValue());
+
+		// check if this node matches the last i.e. see if the whole cycle has been printed
+		if (visitedNodes.get(i).equals(visitedNodes.get(lastNodeIdx))) {
+			return;
+		} else {
+			// print separators
+			System.out.print(" - ");
+		}
+	}
+}
+
+a>b>c>a
+
+
+ time complexity:
+ DFS (V + E)
+ Space (n + n) - recursive calls and visited node storage
+ ArrayList contains operation Time: O(n)
+ Print cycle: Time: O(n), Space: (1)

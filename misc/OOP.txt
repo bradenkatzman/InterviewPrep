@@ -1,0 +1,20 @@
+Inheritance: inherit attributes and methods from one class to another
+	- subclass (child): the class that inherits from another class
+	- superclass (parent): the class being inherited from
+
+Encapsulation: wrappoing up of data under a single unit
+	- private/public methods and variables
+
+Polymorphism: the ability of an object to take on many forms
+	e.g. parent class reference is used to refer to a child class object
+
+	** All java objects are polymorphic because they are of their own type and the Object type
+
+	public interface Vegetarian{}
+	public class Animal{}
+	public class Deer extends Animal implements Vegetarian{}
+
+	Deer d = new Deer();
+	Animal a = d;
+	Vegetarian v = d;
+	Object o = d;

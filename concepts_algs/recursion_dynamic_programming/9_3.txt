@@ -1,0 +1,63 @@
+// A magic index in an array A[0,...,n-1] is defined to be an index such that A[i] = i. Given a sorted array of distinct integers, write a method to find a magic index, if one exists
+
+[0,]
+[-1,-2,2]
+
+// iterate through the list and check if the value equals the index
+O(n)
+
+
+[-1,-2,-3,3]
+
+
+[1,2,3,4,5]
+if A[i] > i --> nothing after this value will be a magic index --> recurse on first half
+if A[i] < i --> nothing before this will be a magic index --> recurse on second half
+
+
+Input: sorted array of distinct integers
+Output: magic index if one exists, -1 otherwise
+
+public static int findMagicIndex(int[] arr) {
+	if (arr == null) return -1;
+
+	return findMagicIndex(arr, 0, arr.length);
+}
+
+// binary search to find a magic index - A[i] = i is a magic index
+public static int findMagicIndex(int[] arr, int lowerBound, int upperBound) {
+	// error handling
+	if (arr == null || lowerBound < 0 || lowerBound > arr.length-1 || upperBound < 0 || upperBound > arr.length-1) return -1;
+
+	// no magic index case is when the upper and lower bound indices are valid but have passed each other
+	if (lowerBound > upperBound) return -1;
+
+	// base case is when lower bound and upper bound equal each other, then we check the value and return if it's magic index
+	if (lowerBound == upperBound) {
+		if (arr[lowerBound] == lowerBound) return lowerBound; // success, magic index found
+
+		// magic index not found
+		return -1;
+	}
+
+	// recursive step is to check the value at the midpoint, evaluate it and recurse on the appropriate sublist
+	int mid = (lowerBound + upperBound) / 2;
+
+	// check the value at mid to see if it's magic
+	if (arr[mid] == mid) return mid; // success, magic index found
+
+	// otherwise, check the value at mid in relation to the index and recurse on the appropriate half
+	if (arr[mid] > mid) {
+		// if the value at arr[mid] is greater than mid, then there couldn't be a value that matches the index after that.
+		// recurse on the sublist from lowerBound to mid-1
+		return findMagicIndex(arr, lowerBound, mid-1);
+	} else if (arr[mid] < mid) {
+		// recurse on the sublist from mid+1 to upperBound
+		return findMagixIndex(arr, mid+1, upperBound);
+	}
+
+	return -1; // fail case if code reached
+}
+
+Time: O(log n) --> runtime of binary search
+Spaace: O(log n) --> number of recursive calls

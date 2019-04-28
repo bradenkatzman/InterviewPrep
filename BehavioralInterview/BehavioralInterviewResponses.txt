@@ -1,0 +1,70 @@
+AceTree image loading refactor:
+	
+	Summary: Microscopy data (3D image stacks over time) analysis and editing software. The loading pipeline was poorly implemented, redundant, and wasn't flexible with new technologies (different image bit depths, microscope conventions). The program was built for a specific set of microscopes and expected data to be of a certain size and couldn't scale well. I reimplemented the loading pipeline with a focus on the following aspects:
+		 - OOP: configuration classes to hold config data, manager classes to act as top level data management, modularized data manipulation classes (directory parsing, image conversion, etc.)
+		 - Generalization: intelligently determine, or explicitly set metadata
+		 - Extendability: easily implement new data handling schemes as technology evolved
+	
+	Most challenging:
+		- generalizing the loading process as much as possible, giving the user as much flexibility as possible without burdening them with an excess of configuration, anticipating future developments in microscopy technology
+
+
+Tissue Modeling:
+	Summary: Generate 3d models of organ structures as they develop over time - morphing and changing shape
+	
+	Most challenging: Because the models were made to be shown in a dynamic data-visualization program, they had to be able to be loaded by a 3D graphics application really efficiently. When I first generated the models, they were accurate but were so complex (lots of vertices and edges). How could I reduce the number of triangles without losing accuracy? This introduced me to the realities of these runtime vs. precision tradeoffs, and efficient memory management
+	
+	What I learned: performance and runtime considerations
+	
+	Hardest Bug: Covering all of the edges cases in a convolutional smoothing post-processing method. Applying a filter to to multiple meshes has edge cases in time, and localized smoothing on each mesh has edges cases in space
+
+
+WormGUIDES:
+	Summary:
+	
+	Most challenging: 
+		- thread management, building the application to be both safe and externally controllable
+		- loading times for scene graph as it grew in size
+	
+	What I learned:
+		This was a turning point in this data visualization software. The scene graph had grown so large and complex, and the complexity of the annotations was very high, so I had to optimize how the scene was generated. This consisted of caching certain components of the scene and adding an extra field to the scene object data structures to indicate whether it needed to be updated. Cut down the load time by ~50%
+	
+	Hardest Bug:
+		- Implementing external data manipulation hooks within the context of the JavaFX application thread. We wanted this application to be completely externally controlled - load a dataset that was open in another application in this program for use as a data viewer, change the time and data from externally
+
+		- How to deal with changes to the core data structure that occur outside of the application? Built a high level interface for the data structure and had to really learn the ins and outs of the thread command scheduler
+
+
+
+What are your weaknesses?
+At times, I'm not realistic about the time that's required to complete tasks and this has led to missed/extended deadlines and time lines. I am prone to over committing myself and take on too much. Have been working on being realistic about my own abilities and delegating and working with a team to intelligengly divide projects into manageable chunks 
+
+
+What are your strengths?
+I'm a dedicated learner, and generally enthusiastic about work. I think I bring a strong set of existing skills, but I think that my biggest value on a team is my ability to learn new things in-depth. I'm good at self-teaching. I think about all of the work I do as an opportunity to learn, and this motivates me.
+
+	- software engineering examples: computer graphics and computer vision
+
+	- extracurricular: built a computer, implementing new research algorithms (q learning), built a greenhouse
+
+
+----------------------------------------------
+				Deliverr
+
+Why am I excited about the prospect of working here?
+The opportunity to work on something new and make a contribution to something as it grows is really exciting
+
+I think the idea is really good. I think it's bold and I'm looking to work in an environment that's willing and eager to push the boundaries of how things are done.
+
+I think this is a paradigm shifting idea, in that it takes the model that Amazon has made a standard and improves it. I was always struck by how many ways Amazon had to reinvent the wheel to achieve what they did. They had to take huge losses to recreate a shipping and distribution network and infrastructure, and now that comes at a price. The approach Deliverr is to partner with and work within the existing infrastructure for shipping, and by using technology, offer people what Amazon can without needing to pay the cost of making up for the losses Amazon accrued because they built what aleady existed.
+
+Pushes back against monopolization.
+
+I think it's really intriguing for the customer. Instead of having to maintain all these separate listings on various eCommerce sites, they are handled 
+
+I think the blog section demonstrates accessibility and transparency in working with your products
+
+
+
+
+
