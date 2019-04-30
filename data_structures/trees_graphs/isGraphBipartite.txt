@@ -1,0 +1,91 @@
+Given a graph G, determine if G is bipartite using DFS. A bipartite graph (or bigraph) is a graph whose vertices can be divided into two disjoint sets U and V such that every edge connects a vertex in U to one in V
+
+
+input: Node g
+output: true
+
+
+how to check for bipartite?
+option 1: check if does not contain an odd cycle using BFS and setting the level of each node encounted. If a visited node is encountered again and it has the same level as the current level, the graph is not bipartite
+option 2: check if it is 2-colorable using preorder DFS and assigning opposite boolean values to indicate color. if a visited node is encountered again and its color is the same as its parent, the graph is not bipartite
+
+
+option 1:
+public static boolean isGraphBipartite(Node root) {
+	// empty tree or single node tree are not bipartite
+	if (root == null || root.getAdjacencies().isEmpty()) return false;
+
+	// maintain a level count
+	level = 0;
+
+	Queue<Integer> queue = new LinkedList<>();
+
+	// visit the node by setting its visited field and level
+	root.setLevel(level);
+	root.setVisited(true);
+
+
+	// add the root to the queue to process its children
+	queue.add(root);
+
+	while (!queue.isEmpty()) {
+
+		// remove the first element in the queue
+		Node n = queue.remove();
+
+		// visit all of n's adjacencies
+		for (Node adj : n.getAdjacencies()) {
+			if (!adj.isVisited()) {
+				// visit the node. it's level is one greater than n's level
+				adj.setLevel(n.getLevel() + 1);
+				adj.setVisited(true);
+
+				// add adj to the queue for its children to be processed
+				queue.add(adj);
+			}
+
+			// if adj has already been visited, compare its level to n's level
+			if (adj.getLevel() == n.getLevel()) {
+				// we found an edge that has endpoints in the same level, indicating
+				// an odd cycle. the graph is therefore not bipartite
+				return false;
+			}
+
+		}
+	}
+
+	return true; // the entire tree was processed without finding an odd cycle, the graph is bipartite
+
+}
+
+Time: O(V + E)
+
+
+
+option 2:
+use true, false as the 2 colors (boolean)
+
+public static boolean isGraphBipartite(Node root) {
+	if (g == null) return false;
+
+	for (Node n : root.getAdjacencies()) {
+		// if the node hasn't been visited, assign it a color that is opposite of its parent
+		if (!n.isVisited()) {
+			n.setVisisted(true);
+
+			// set its color as inverse of parent
+			n.setColor(!root.getColor());
+
+			// recurse on the subtree rooted at n and stop if the subtree isn't bipartite
+			if (!isGraphBipartite(n)) return false;
+		}
+
+		// if the node has been visited, make sure its color is different from root
+		if (n.getColor() == root.getColor()) return false;
+	}
+
+	return true;
+}
+
+
+Time: O(V + E)

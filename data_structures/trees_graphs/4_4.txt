@@ -1,0 +1,81 @@
+// Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a binary search tree with minimal height
+
+[0,1,2,3,4]
+
+			2
+		  /	  \
+		 1	   3
+	    /       \
+	   0	     4
+
+
+
+// how to add right children on the left subtree, and left children on the right subtree
+
+[0,1,2,3,4,5,6]
+
+
+		3
+	   / \
+	  1   5
+	 / \  / \
+	0   2 4  6
+
+
+input: list of increasing order unique integers
+output: Node root of a binary search tree
+
+
+public static Node createBSTFromArr(int[] arr) {
+	if (arr == null) return null;
+
+	return createBSTFromArr(arr, 0, arr.length-1);
+}
+
+public static Node createBSTFromArr(int[] arr, int lowerBound, int upperBound) {
+	// base case
+	if (upperBound == lowerBound) return new Node(arr[lowerBound]);
+
+	// base case
+	if (lowerBound > upperBound) return null; // this happens in the case of an array with even number of elements. null child indicates leaf node
+
+	// compute midpoint between lower and upper bound
+	int mid = (lowerBound + upperBound) / 2;
+
+	// make a tree rooted at mid
+	Node root = new Node(arr[mid]);
+
+	// recurse on left and right subtree
+	root.setLeft(createBSTFromArr(arr, lowerBound, mid-1));
+	root.setRight(createBSTFromArr(arr, mid+1, upperBound));
+
+	return root;
+}
+
+Test: [0,1,2,3,4,5,6]
+0, 6
+mid = 3
+
+
+3.left = recurse(0, 2)
+	mid = 1
+	1.left = recurse(0, 0)
+		0
+
+	1.right = recurse(2, 2)
+		
+
+		
+
+3.right = recurse(3, 6)
+
+		3
+	   /
+	  1
+	 / \
+	0   2
+
+
+Time: O(log n)
+
+Space: memory: O(n), stack calls: (n)

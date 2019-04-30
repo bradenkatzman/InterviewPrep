@@ -1,0 +1,86 @@
+// You have two very large trees: T1, with millions of nodes, and T2, with hundreds of nodes. Create an algorithm to decide if T2 is a subtree of T1
+
+A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2. That is, if you cut off the tree at node n, the two trees would be identical
+
+		 5
+		/ \
+	   3   8			3
+	  / \			   / \
+	 1   4		      1	  4
+
+Input: Two nodes (roots)
+Output: boolean
+
+Guaranteed that T2 is smaller than T1
+
+is this a binary tree? yes
+is there a possibility of cycles? no
+
+values or objects comparison?
+	if values: are there repeat values?
+	 3
+    /
+   3 
+  / \	
+ 1   4
+
+
+ values comparison, no repeated values
+
+ --> first thing I need to do is a search in T1 for the root of T2
+ BFS or DFS
+
+ after search returns success:
+ 	DFS or BFS on both trees at the same time, checking for sameness at every step'
+
+public static boolean doesTreeContainSubtree(Node T1, Node T2) {
+	if (T1 == null || T2 == null) return T2 == null; /* if T2 is the null culprit, it's contained in the subtree whether T1 is null or not. If T2 isn't null, T1 must be and this is a case where we return false */
+
+	Node T1Subtree = DFS(T1, T2.getValue());
+
+	// check if a subtree was found in T1 with a root that matches T2's root
+	if (T1Subtree == null) return false; // didn't find a subtree with matching root
+
+	// perform DFS again on the two trees, checking for equivalence at every node
+	return areTreesIdentical(T1Subtree, T2);
+}
+
+// performs an inorder traversal in search of the given data
+public static Node DFS(Node root, int searchData) {
+ 	// base case
+ 	if (root == null) return null;
+
+ 	// recurse on left subtree
+ 	DFS(root.getLeft());
+
+ 	// process this node by checking if it's value equals the searchData
+ 	if (root.getValue() == searchData) return root;
+
+ 	DFS(root.getRight());
+
+ 	return null; // failed to find the search data
+}
+
+// performs an inorder traversal of the two trees in tandem, evaluating each node for equivalence
+public static boolean areTreesIdentical(Node T1, Node T2) {
+	// base case is when a node is null, return true if both null, false otherwise
+	if (T1 == null || T2 == null) return T1 == null && T2 == null;
+
+	// recurse on left children
+	areTreesIdentical(T1.getLeft(), T2.getLeft());
+
+	// process the nodes by checking if they are equal
+	if (T1.getValue() != T2.getValue()) return false;
+
+	// recurse on right children
+	areTreesIdentical(T1.getRight(), T2.getRight());
+
+	// if we've reached the end without a return value, all nodes were equal
+	return true;
+}
+
+ Time: worst case O(V + E) where V = number of vertices, E = number of edges
+ Space: O(V + E)
+
+
+ 29 minutes
